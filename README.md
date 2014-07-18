@@ -1,5 +1,4 @@
 ![WeatherFetch Logo](http://i1158.photobucket.com/albums/p618/g12mcgov/Photobucket%20Desktop%20-%20Grants%20MacBook%20Pro/a5139f86-a425-49cc-9764-56eb8d4da064.png)
-
 Idea
 ============
 WeatherFetch is the new handy way to get your weather. I personally hate the iPhone weather app. It lacks detail, is often inacurate, and it requires you to open the app, wait for the data load, and try to create an outfit to wear based on the weather you're seeing. 
