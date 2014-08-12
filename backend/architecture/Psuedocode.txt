@@ -1,0 +1,31 @@
+# Method 1: Lookup by Zipcode (Faster, but more intricate)
+
+1. Query user database 
+2. Lookup users by same zipcode. 
+	Return list.
+3. Lookup weather by that zip code. 
+3. Now lookup time by time within that list. 
+	If they have the same time and the time is rounded to the closest hour of the current time:
+		 send emails to those people with weather data. 
+	Else: 
+		We can break out and leave. 
+
+# Method 2: Lookup by Time (Probably slower, but makes more sense) 
+
+1. Query user database
+2. Lookup users by the current time (rounded to the nearest whole hour) 
+	Return list of users (e.g. give me the 5:00am users). 
+3. Lookup weather data for those users and their respective zip codes. (This might be slow... Idk... depends on the API response speed)
+	Handle Data... attach it that user object. 
+4. Compute averages / suggest what to wear for that particular day 
+5. Iterate through users send email: 
+	Here's what we need: 
+		Name 
+		Email address 
+		HTML Body: (call HTML Generate function with passed in args, return HTML)
+			Zip code 
+			Time 
+			Weather (from multiple sources) 	
+			Suggestions what to wear
+		 
+		

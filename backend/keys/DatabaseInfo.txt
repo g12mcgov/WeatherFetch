@@ -1,0 +1,7 @@
+/* Amazon AWS WeatherFetch Database Information */
+
+DBName ... WeatherFetchDB
+DBPassword ... nantucket
+DBRootPassword ... grantmcgovern1
+DBUsername ... nightstalker
+
