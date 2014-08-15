@@ -24,7 +24,7 @@ sys.path.append('Helpers')
 from Database import *
 from forecast import *
 from wunderground import *
-from worldweather import *
+from hamweather import *
 from User import *
 from apitracker import *
 
@@ -42,6 +42,12 @@ def main():
 
 	expected_api_calls = (len(Users) * 5)
 	apiLimiter(expected_api_calls)
+
+	for user in Users:
+		forecast_io_hourly = user.hourlyForecastIO()
+		wunderground_hourly = user.hourlyWunderGround()
+		hamweather_hourly = user.hourlyHamWeather()
+		weather_map = user.getWeatherMap()
 
 def createUserDict(members):
 	userDicts = []
@@ -71,8 +77,9 @@ def createUsers(users_with_weather):
 		## WEATHER ##
 		forecast_io = userDict['forecastIo']
 		wunderground = userDict['wunderground']
+		hamweather = userDict['hamweather']
 
-		Users.append(User(userId, username, email, time, timezone, zipcode, forecast_io, wunderground, None))
+		Users.append(User(userId, username, email, time, timezone, zipcode, forecast_io, wunderground, hamweather))
 
 	return Users
 
@@ -81,13 +88,33 @@ def aggregateWeatherGrab(userDicts):
 	zipcodes = userDicts['zipcode']
 	forecast_io = forecastIO(zipcodes)
 	wunderground = wunderGround(zipcodes)
-	worldweather = worldWeather(zipcodes)
+	hamweather = hamWeather(zipcodes)
 
 	userDicts['forecastIo'] = forecast_io
 	userDicts['wunderground'] = wunderground
-	userDicts['worldweather'] = worldweather
+	userDicts['hamweather'] = hamweather
+
+	#apiCount(wunderGround.count, hamWeather.count, forecastIO.count)
 
 	return userDicts
+
+def apiCount(wunderground_count, hamweather_count, forecast_io_count):
+	wunderground_count_list = []
+	hamweather_count_list = []
+	forecast_io_count_list = []
+
+	wunderground_count_list.append(wunderground_count)
+	hamweather_count_list.append(hamweather_count)
+	forecast_io_count_list.append(forecast_io_count)
+
+	wunder_sum = sum(wunderground_count_list)
+	ham_sum = sum(hamweather_count_list)
+	forecast_sum = sum(forecast_io_count_list)
+
+	#print wunder_sum
+	#print ham_sum
+	#print forecast_sum
+
 
 if __name__ == "__main__":
 	main()

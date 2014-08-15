@@ -17,11 +17,12 @@ import requests
 import datetime
 from pyzipcode import ZipCodeDatabase
 import itertools 
+from wrappers import * 
 
 API_KEY = '4dd221246d2daff383469cf4a5b68b32/'
 BASE_URL = 'https://api.forecast.io/forecast/'
 
-
+@counter
 def forecastIO(zipcode):
 	geoDict = zipcodeConverter(zipcode)
 	response = outboundCall(geoDict)
@@ -47,6 +48,7 @@ def zipcodeConverter(zipcode):
 
 	return geoDict 
 
+
 def outboundCall(geoDict):
 	longitude = geoDict['longitude']
 	latitude = geoDict['latitude']
@@ -67,11 +69,11 @@ def processData(response):
 	hourly = [data for data in hourly_data['data']]
 
 	hourlyDictList = []
-	hourlyDictList.append({'overall_icon':icon, 'overall_summary':summary})
+	hourlyDictList.append({'general':{'overall_icon':icon, 'overall_summary':summary}})
 
 	for hour in itertools.islice(hourly, 0, 10):
 		hourlyDict = {}
-		hourlyDict['time'] = datetime.datetime.fromtimestamp(int(hour['time'])).strftime('%H:%M') ## Convert to GMT 
+		hourlyDict['time'] = datetime.datetime.fromtimestamp(int(hour['time'])).strftime('%I:%M %p') ## Convert to GMT 
 		hourlyDict['temperature'] = hour['temperature']
 		hourlyDict['icon'] = hour['icon']
 		hourlyDict['humidity'] = hour['humidity']
@@ -81,8 +83,11 @@ def processData(response):
 		hourlyDictList.append(hourlyDict)
 
 	current_data = response['currently']
+	daily_data = response['daily']['data'][0]
 
 	currentDict = {}
+	currentDict['tempMax'] = daily_data['temperatureMax']
+	currentDict['tempMin'] = daily_data['temperatureMin']
 	currentDict['time'] = current_data['time']
 	currentDict['temperature'] = current_data['temperature']
 	currentDict['icon'] = current_data['icon']

@@ -18,11 +18,12 @@ import datetime
 import itertools
 import urllib
 import urlparse
+from wrappers import * 
 
 API_KEY = '8bb93b6670e3f3de'
 BASE_URL = 'http://api.wunderground.com/api/'
 
-
+@counter
 def wunderGround(zipcodes):
 	current_weather = getCurrentWeather(zipcodes)
 	hourly_weather = getHourlyForecast(zipcodes)
@@ -31,24 +32,23 @@ def wunderGround(zipcodes):
 
 	return data
 	
-
 def getCurrentWeather(zipcodes):
 	current_weather = json.loads(requests.get(url=BASE_URL+API_KEY+'/conditions/q/'+zipcodes+'.json').content)
 
-	with open("wunderground_current.js", "wb") as outfile:
+	save_path = 'Weather/responses/'
+	complete_path = save_path + 'wunderground_current.js'
+	with open(complete_path, "wb") as outfile:
 		outfile.write(json.dumps(current_weather, separators=(',',':'), indent=4))
-
-	#print json.dumps(current_weather, separators=(',',':'), indent=4)
 	
 	return current_weather
 
 def getHourlyForecast(zipcodes):
 	hourly_weather = json.loads(requests.get(url=BASE_URL+API_KEY+'/hourly/q/'+zipcodes+'.json').content)
 
-	with open("wunderground_hourly.js", "wb") as outfile:
+	save_path = 'Weather/responses/'
+	complete_path = save_path + 'wunderground_hourly.js'
+	with open(complete_path, "wb") as outfile:
 		outfile.write(json.dumps(hourly_weather, separators=(',',':'), indent=4))
-	
-	#print json.dumps(hourly_weather, separators=(',',':'), indent=4)
 
 	return hourly_weather
 
