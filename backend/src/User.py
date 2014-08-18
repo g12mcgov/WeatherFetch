@@ -121,6 +121,48 @@ class User():
 
 		return formatted_hours
 
+	def computeCurrentAverage(self):
+		wunderground_temp = float(self.WunderGround[0]['temp_f']) ## Current info stored in index[0]
+		forecast_io_temp = float(self.ForecastIO[1]['temperature']) ## Current info stored in index[1]
+		hamweather_temp = float(self.HamWeather[0]['temp']) ## Current info stored in index[0]
+
+		avg = lambda wunderground_temp, forecast_io_temp, hamweather_temp: round(((wunderground_temp+forecast_io_temp+hamweather_temp)/3), 1)
+		average = avg(wunderground_temp, forecast_io_temp, hamweather_temp)
+
+
+		return average
+
+	def computeMaxAverage(self):
+		wunderground_max = float(self.WunderGround[0]['maxTemp']) ## Current info stored in index[0]
+		forecast_io_max = float(self.ForecastIO[1]['tempMax']) ## Current info stored in index[1]
+		hamweather_max = float(self.HamWeather[0]['maxTemp']) ## Current info stored in index[0]
+
+		avg = lambda wunderground_max, forecast_io_max, hamweather_max: round(((wunderground_max+forecast_io_max+hamweather_max)/3), 1)
+		average = avg(wunderground_max, forecast_io_max, hamweather_max)
+
+
+		return average
+
+	def computeMinAverage(self):
+		wunderground_min = float(self.WunderGround[0]['minTemp']) ## Current info stored in index[0]
+		forecast_io_min = float(self.ForecastIO[1]['tempMin']) ## Current info stored in index[1]
+		hamweather_min = float(self.HamWeather[0]['minTemp']) ## Current info stored in index[0]
+
+		avg = lambda wunderground_min, forecast_io_min, hamweather_min: round(((wunderground_min+forecast_io_min+hamweather_min)/3), 1)
+		average = avg(wunderground_min, forecast_io_min, hamweather_min)
+
+
+		return average
+
+	def currentPOP(self):
+		wunderground_current = self.WunderGround[0] ## Current info stored in index[0]
+		forecast_io_current = self.ForecastIO[1] ## Current info stored in index[1]
+		hamweather_current = self.HamWeather[0] ## Current info stored in index[0]
+
+		#print wunderground_current
+
+
+
 
 
 

@@ -84,7 +84,7 @@ def processData(current, hourly):
 
 	## Create a list of min temps and find the lowest temperature in it
 	min_temps = [temp['minTemp'] for temp in hourlyDictList]
-	index, min_temp = max(enumerate(min_temps), key=operator.itemgetter(1))
+	index, min_temp = min(enumerate(min_temps), key=operator.itemgetter(1))
 
 	## Current ## 
 	current_weather = current['response']

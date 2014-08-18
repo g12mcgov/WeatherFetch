@@ -18,6 +18,7 @@ import datetime
 import itertools
 import urllib
 import urlparse
+import operator
 from wrappers import * 
 
 API_KEY = '8bb93b6670e3f3de'
@@ -67,19 +68,6 @@ def getWeatherMap(zipcodes):
 	return weather_map
 
 def processData(current_weather, hourly_weather, weather_map):
-	## Current ## 
-	current_observation = current_weather['current_observation']
-
-	currentDict = {}
-	currentDict['weather'] = current_observation['weather']
-	currentDict['local_time_rfc822'] = current_observation['local_time_rfc822']
-	currentDict['precip_today_string'] = current_observation['precip_today_string']
-	currentDict['precip_today_metric'] = current_observation['precip_today_metric']
-	currentDict['precip_today_in'] = current_observation['precip_today_in']
-	currentDict['temp_f'] = current_observation['temp_f']
-	currentDict['icon'] = current_observation['icon']
-	currentDict['relative_humidity'] = current_observation['relative_humidity']
-
 	## Hourly ## 
 
 	hourly_forecast = hourly_weather['hourly_forecast']
@@ -96,6 +84,28 @@ def processData(current_weather, hourly_weather, weather_map):
 		hourlyDict['icon'] = hour['icon']
 		hourlyDict['precipProbability'] = hour['pop']
 		hourlyDictList.append(hourlyDict)
+
+	## Current ## 
+	current_observation = current_weather['current_observation']
+
+	temps = [temp['temp'] for temp in hourlyDictList]
+	## Calculate max temp
+	index, max_temp = max(enumerate(temps), key=operator.itemgetter(1))
+	## Calculate min temp
+	index, min_temp = min(enumerate(temps), key=operator.itemgetter(1))
+
+	currentDict = {}
+	currentDict['pop'] = hourlyDictList[0]['precipProbability']
+	currentDict['maxTemp'] = max_temp
+	currentDict['minTemp'] = min_temp
+	currentDict['weather'] = current_observation['weather']
+	currentDict['local_time_rfc822'] = current_observation['local_time_rfc822']
+	currentDict['precip_today_string'] = current_observation['precip_today_string']
+	currentDict['precip_today_metric'] = current_observation['precip_today_metric']
+	currentDict['precip_today_in'] = current_observation['precip_today_in']
+	currentDict['temp_f'] = current_observation['temp_f']
+	currentDict['icon'] = current_observation['icon']
+	currentDict['relative_humidity'] = current_observation['relative_humidity']
 
 	weatherDict = {'weather_map':weather_map}
 

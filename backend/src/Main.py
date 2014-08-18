@@ -17,16 +17,19 @@ import sys
 import inspect
 import logging
 import multiprocessing
-
-sys.path.append('Weather')
-sys.path.append('Helpers')
 ## Local Includes 
+sys.path.append('weather')
+sys.path.append('helpers')
+sys.path.append('email')
+## 
 from Database import *
 from forecast import *
 from wunderground import *
 from hamweather import *
 from User import *
 from apitracker import *
+from body import constructTemplate
+from sender import sendEmail
 
 def main():
 	CPU_COUNT = multiprocessing.cpu_count()
@@ -48,7 +51,14 @@ def main():
 		wunderground_hourly = user.hourlyWunderGround()
 		hamweather_hourly = user.hourlyHamWeather()
 		weather_map = user.getWeatherMap()
-
+		current_average = user.computeCurrentAverage()
+		max_average = user.computeMaxAverage()
+		min_average = user.computeMinAverage()
+		pop = user.currentPOP()
+		email_body = constructTemplate(forecast_io_hourly, wunderground_hourly, hamweather_hourly, weather_map, current_average,
+			max_average, min_average, pop)
+		sendEmail(email_body)
+		
 def createUserDict(members):
 	userDicts = []
 	for user in members:
