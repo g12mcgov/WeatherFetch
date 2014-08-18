@@ -1,7 +1,7 @@
 ##
 ## WeatherFetch - Hamweather.py
 ## 
-## **** THIS FILE IS DESIGNED TO OBTAIN DATA FROM WORLDWEATHER ***  
+## **** THIS FILE IS DESIGNED TO OBTAIN DATA FROM HAMWEATHER ***  
 ## 
 ## Created by: Grant McGovern
 ## Date: 31 July 2014

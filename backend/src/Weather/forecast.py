@@ -1,13 +1,13 @@
 ##
-## WeatherFetch - MAIN.
+## WeatherFetch - FORECAST.py.
 ## 
-## **** THIS FILE IS THE DRIVER ***  
+## **** THIS FILE GETS WEATHER DATA FROM Forecast.io ***  
 ## 
 ## Created by: Grant McGovern
 ## Date: 31 July 2014
 ## Contact: github.com/g12mcgov 
 ##
-## Purpose: This is the main driver for the entire application.
+## Purpose: To fetch weather data from Forecast.io.
 ##
 ##
 ##

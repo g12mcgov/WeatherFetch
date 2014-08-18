@@ -27,16 +27,23 @@ from forecast import *
 from wunderground import *
 from hamweather import *
 from User import *
-from apitracker import *
+from apitracker import apiLimiter, apiAlert
 from body import constructTemplate
 from sender import sendEmail
+
+## Define Timezone ## 
+TIME_ZONE = "EDT"
+
+## Setup Logging ##
+logging.basicConfig(level = logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 def main():
 	CPU_COUNT = multiprocessing.cpu_count()
 	pool = multiprocessing.Pool(processes=CPU_COUNT-1)
 
 	cursor = establishDBConnection()
-	members = getDBData(cursor)
+	members = getDBData(cursor, TIME_ZONE)
 	userDicts = createUserDict(members)
 
 	users_with_weather = pool.map(aggregateWeatherGrab, userDicts)
@@ -55,10 +62,12 @@ def main():
 		max_average = user.computeMaxAverage()
 		min_average = user.computeMinAverage()
 		pop = user.currentPOP()
+		## Construct email and send. If we get enough users, this will be switched to send batch messages 
+		## at once, most likely through an API (mailchimp) or using postfix.
 		email_body = constructTemplate(forecast_io_hourly, wunderground_hourly, hamweather_hourly, weather_map, current_average,
 			max_average, min_average, pop)
 		sendEmail(email_body)
-		
+
 def createUserDict(members):
 	userDicts = []
 	for user in members:
@@ -77,7 +86,6 @@ def createUserDict(members):
 def createUsers(users_with_weather):
 	Users = []
 	for userDict in users_with_weather:
-		#print json.dumps(userDict, separators=(',',':'), indent=4)
 		userId = userDict['userId']
 		username = userDict['username']
 		email = userDict['email']

@@ -1,5 +1,5 @@
 ##
-## WeatherFetch - GROUPS.
+## WeatherFetch - USER.py.
 ## 
 ## **** THIS FILE DESCRIBES STRUCTURE FOR USERS ***  
 ## 

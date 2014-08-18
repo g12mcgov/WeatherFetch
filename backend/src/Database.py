@@ -7,7 +7,7 @@
 ## Date: 31 July 2014
 ## Contact: github.com/g12mcgov 
 ##
-## Purpose: Connect to MySQL DB running on Amazon EC2 instance
+## Purpose: Connect to MySQL DB and Query data.
 ##
 ##
 ##
@@ -16,11 +16,6 @@ import MySQLdb
 import logging
 import time
 from datetime import datetime, timedelta
-
-logging.basicConfig(level = logging.DEBUG)
-logger = logging.getLogger(__name__)
-
-TIME_ZONE = "EDT" # TO CHANGE
 
 def establishDBConnection():
 	logger.debug("Establishing Database Connection")
@@ -55,7 +50,7 @@ def handleTime(dt=None, roundTo=60):
 	## Returns rounded UTC time
 	return rounded_time 
 
-def getDBData(cursor):
+def getDBData(cursor, TIME_ZONE):
 	## Simply to monitor speed of query. If this gets too big, we
 	## may need to find alternative options.
 	start_time = time.time() 

@@ -1,13 +1,14 @@
 ##
-## WeatherFetch - DB.
+## WeatherFetch - APITRACKER.py.
 ## 
-## **** THIS FILE HANDLES DATABASE WORK ***  
+## **** THIS FILE TRACKS API USAGE AND NOTIFIES IF SPILLOVER ***  
 ## 
 ## Created by: Grant McGovern
-## Date: 31 July 2014
+## Date: 18 August 2014
 ## Contact: github.com/g12mcgov 
 ##
-## Purpose: Connect to MySQL DB running on Amazon EC2 instance
+## Purpose: Using Twilio, if API requests exceeded defined limits, it notifies me via SMS. 
+## 			Handy way to know when to bump up usage.
 ##
 ##
 ##
