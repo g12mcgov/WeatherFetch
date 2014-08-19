@@ -15,6 +15,7 @@
 import os
 import sys
 import smtplib
+from email import message_from_file 
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.MIMEImage import MIMEImage
@@ -28,7 +29,7 @@ def sendEmail(email_body):
 	strTo = 'mcgoga12@wfu.edu'
 
 	msgRoot = MIMEMultipart('related')
-	msgRoot['Subject'] = 'test message'
+	msgRoot['Subject'] = 'Your Daily Report'
 	msgRoot['From'] = strFrom
 	msgRoot['To'] = strTo
 
@@ -54,10 +55,10 @@ def sendEmail(email_body):
 		server.ehlo()
 		server.starttls()
 		try:
-        	server.login('grantmcgovern.mcgovern@gmail.com', 'grantmcgovern1')
-    	except SMTPAuthenticationError:
-        	server.quit()
-        	raise Exception("Invalid credentials - could not authenticate")
+			server.login('grantmcgovern.mcgovern@gmail.com', 'grantmcgovern1')
+		except SMTPAuthenticationError:
+			server.quit()
+			raise Exception("Invalid credentials - could not authenticate")
 		server.sendmail(strFrom, strTo, msgRoot.as_string())
 		server.close()
 	except:

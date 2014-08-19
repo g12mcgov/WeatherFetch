@@ -64,6 +64,50 @@ class User():
 
 		return weather_map
 
+	def currentForecastIO(self):
+		current_data = self.ForecastIO[1]
+		
+		## Extract from dict ## 
+		forecast_ioDict = {}
+		forecast_ioDict['temperature'] = current_data['temperature']
+		forecast_ioDict['summary'] = current_data['summary']
+		forecast_ioDict['time'] = current_data['time']
+		forecast_ioDict['pop'] = str(current_data['precipProbability'])+'%'
+		forecast_ioDict['humidity'] = current_data['humidity']
+		forecast_ioDict['tempMax'] = current_data['tempMax']
+		forecast_ioDict['tempMin'] = current_data['tempMin']
+
+		return forecast_ioDict
+
+	def currentWunderGround(self):
+		current_data = self.WunderGround[0]
+		
+		## Extract from dict ##
+		wundergroundDict = {}
+		wundergroundDict['temperature'] = current_data['temp_f']
+		wundergroundDict['summary'] = current_data['weather']
+		wundergroundDict['time'] = current_data['local_time_rfc822']
+		wundergroundDict['pop'] = str(current_data['pop'])+'%'
+		wundergroundDict['humidity'] = current_data['relative_humidity']
+		wundergroundDict['tempMax'] = current_data['maxTemp']
+		wundergroundDict['tempMin'] = current_data['minTemp']
+
+		return wundergroundDict
+
+	def currentHamWeather(self):
+		current_data = self.HamWeather[0]
+		
+		hamweatherDict = {}
+		hamweatherDict['temperature'] = current_data['temp']
+		hamweatherDict['summary'] = current_data['weather']
+		hamweatherDict['time'] = current_data['time']
+		hamweatherDict['pop'] = str(current_data['pop'])+'%'
+		hamweatherDict['humidity'] = str(current_data['humidity'])+'%'
+		hamweatherDict['tempMax'] = current_data['maxTemp']
+		hamweatherDict['tempMin'] = current_data['minTemp']
+
+		return hamweatherDict
+
 	def hourlyForecastIO(self):
 		hourly_data = self.ForecastIO[0]
 		general = hourly_data[0]['general']
@@ -155,12 +199,15 @@ class User():
 		return average
 
 	def currentPOP(self):
-		wunderground_current = self.WunderGround[0] ## Current info stored in index[0]
-		forecast_io_current = self.ForecastIO[1] ## Current info stored in index[1]
-		hamweather_current = self.HamWeather[0] ## Current info stored in index[0]
+		wunderground_current = float(self.WunderGround[0]['pop']) ## Current info stored in index[0]
+		forecast_io_current = float(self.ForecastIO[1]['precipProbability']) ## Current info stored in index[1]
+		hamweather_current = float(self.HamWeather[0]['pop']) ## Current info stored in index[0]
 
-		#print wunderground_current
+		avg = lambda wunderground_current, forecast_io_current, hamweather_current: round(((wunderground_current+forecast_io_current+hamweather_current)/3), 1)
+		average = str(avg(wunderground_current, forecast_io_current, hamweather_current))+'%'		
+		
 
+		return average
 
 
 

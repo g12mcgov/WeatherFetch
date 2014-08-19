@@ -1,0 +1,5 @@
+multiprocessing
+requests
+pyzipcode
+jinja2
+twilio

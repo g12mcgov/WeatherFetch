@@ -17,6 +17,10 @@ import logging
 import time
 from datetime import datetime, timedelta
 
+## Setup Logging ##
+logging.basicConfig(level = logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 def establishDBConnection():
 	logger.debug("Establishing Database Connection")
 
@@ -39,6 +43,7 @@ def establishDBConnection():
 		except MySQLdb.Error as error:
 			logging.debug(error)
 		# 	raise error
+
 
 def handleTime(dt=None, roundTo=60):
 	if dt == None:

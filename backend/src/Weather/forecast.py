@@ -88,7 +88,7 @@ def processData(response):
 	currentDict = {}
 	currentDict['tempMax'] = daily_data['temperatureMax']
 	currentDict['tempMin'] = daily_data['temperatureMin']
-	currentDict['time'] = current_data['time']
+	currentDict['time'] = datetime.datetime.fromtimestamp(int(current_data['time'])).strftime('%I:%M %p')
 	currentDict['temperature'] = current_data['temperature']
 	currentDict['icon'] = current_data['icon']
 	currentDict['humidity'] = current_data['humidity']

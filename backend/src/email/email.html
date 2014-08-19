@@ -1,4 +1,4 @@
-<!-- 
+    <!-- 
 ##
 ## WeatherFetch - EMAIL.jinja.
 ## 
@@ -115,7 +115,10 @@
                     <tr>
                         <p style="color:#2469A0; font-weight:bold; text-align:center;">WeatherChannel</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                        <p>{{ current_average }}</p>
+                        <p>{{ wunderground_current_temp }}</p>
+                        <p style="margin-top:10px;">Precipitation: {{ wunderground_current_pop }}</p>
+                        <p style="margin-top:10px;">High: {{ wunderground_current_tempMax }}</p>
+                        <p style="margin-top:10px;">Low: {{ wunderground_current_tempMin }}</p>
                         </td>
                     </tr>
                     </table>
@@ -127,6 +130,10 @@
                     <tr>
                         <p style="color:#2469A0; font-weight:bold; text-align:center;">Forecast.io</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
+                        <p>{{ forecast_io_current_temp }}</p>
+                        <p style="margin-top:10px;">Precipitation: {{ forecast_io_current_pop }}</p>
+                        <p style="margin-top:10px;">High: {{ forecast_io_current_tempMax }}</p>
+                        <p style="margin-top:10px;">Low: {{ forecast_io_current_tempMin }}</p>
                         </td>
                     </tr>
                     </table>
@@ -139,6 +146,10 @@
                         <tr>
                             <p style="color:#2469A0; font-weight:bold; text-align:center;">HamWeather</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
+                            <p>{{ hamweather_current_temp }}</p>
+                            <p style="margin-top:10px;">Precipitation: {{ hamweather_current_pop }}</p>
+                            <p style="margin-top:10px;">High: {{ hamweather_current_tempMax }}</p>
+                            <p style="margin-top:10px;">Low: {{ hamweather_current_tempMin }}</p>
                             </td>
                         </tr>
                     </table>
@@ -150,6 +161,10 @@
                         <tr>
                             <p style="color:#2469A0; font-weight:bold; text-align:center;">Average</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
+                            <p>{{ current_average }}</p>
+                            <p style="margin-top:10px;">Precipitation: {{ average_pop }}</p>
+                            <p style="margin-top:10px;">High: {{ maxAverage }}</p>
+                            <p style="margin-top:10px;">Low: {{ minAverage }}</p>
                             </td>
                         </tr>
                     </table>

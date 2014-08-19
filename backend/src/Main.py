@@ -16,27 +16,25 @@ import os
 import sys
 import inspect
 import logging
+import requests
 import multiprocessing
 ## Local Includes 
 sys.path.append('weather')
 sys.path.append('helpers')
-sys.path.append('email')
+sys.path.append('Email')
 ## 
 from Database import *
 from forecast import *
 from wunderground import *
 from hamweather import *
-from User import *
+from user import User
 from apitracker import apiLimiter, apiAlert
 from body import constructTemplate
 from sender import sendEmail
+from suggestions import suggestion
 
 ## Define Timezone ## 
 TIME_ZONE = "EDT"
-
-## Setup Logging ##
-logging.basicConfig(level = logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 def main():
 	CPU_COUNT = multiprocessing.cpu_count()
@@ -54,18 +52,31 @@ def main():
 	apiLimiter(expected_api_calls)
 
 	for user in Users:
+		## Current Data ##
+		forecast_io_current = user.currentForecastIO()
+		wunderground_current = user.currentWunderGround()
+		hamweather_current = user.currentHamWeather()
+		## Hourly Data ## 
 		forecast_io_hourly = user.hourlyForecastIO()
 		wunderground_hourly = user.hourlyWunderGround()
 		hamweather_hourly = user.hourlyHamWeather()
+		## Weather Map ##
 		weather_map = user.getWeatherMap()
+		## Averages ##
 		current_average = user.computeCurrentAverage()
 		max_average = user.computeMaxAverage()
 		min_average = user.computeMinAverage()
+		## Precipitation ##
 		pop = user.currentPOP()
+		## Make Suggestions ##
+		suggestions = suggestion(forecast_io_hourly, current_average, max_average, min_average, pop)
+		
 		## Construct email and send. If we get enough users, this will be switched to send batch messages 
 		## at once, most likely through an API (mailchimp) or using postfix.
-		email_body = constructTemplate(forecast_io_hourly, wunderground_hourly, hamweather_hourly, weather_map, current_average,
+		email_body = constructTemplate(forecast_io_current, wunderground_current, hamweather_current, 
+			forecast_io_hourly, wunderground_hourly, hamweather_hourly, weather_map, current_average, 
 			max_average, min_average, pop)
+		
 		sendEmail(email_body)
 
 def createUserDict(members):
