@@ -56,10 +56,11 @@ def main():
 		forecast_io_current = user.currentForecastIO()
 		wunderground_current = user.currentWunderGround()
 		hamweather_current = user.currentHamWeather()
-		## Hourly Data ## 
+		## Hourly Data ##
 		forecast_io_hourly = user.hourlyForecastIO()
 		wunderground_hourly = user.hourlyWunderGround()
 		hamweather_hourly = user.hourlyHamWeather()
+		average_hourly = user.hourlyAverage()
 		## Weather Map ##
 		weather_map = user.getWeatherMap()
 		## Averages ##

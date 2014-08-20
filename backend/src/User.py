@@ -124,10 +124,11 @@ class User():
 
 		for hour in hours:
 			time = hour['time'].lstrip('0')+': ' # Get rid of leading '0'
-			temp = str(hour['temperature'])+'F'
+			temp = str(hour['temperature'])
 			pop = str(int(hour['precipProbability']*100))+'%' # Get rid of decimal, make string to append '%'
 			group = lambda time, temp, pop: (time, temp, pop) # Make tuples
 			formatted_hours.append(group(time, temp, pop))
+
 
 		return (overall_icon, overall_summary, formatted_hours)
 
@@ -140,7 +141,7 @@ class User():
 		
 		for hour in hours:
 			time = hour['time']
-			temp = hour['temp']+'F'
+			temp = hour['temp']
 			pop = hour['precipProbability']+'%'
 			group = lambda time, temp, pop: (time, temp, pop)
 			formatted_hours.append(group(time, temp, pop))
@@ -157,13 +158,45 @@ class User():
 
 		for hour in hours:
 			time = hour['time'].lstrip('0')+': '
-			temp = str(hour['temp'])+'F'
+			temp = str(hour['temp'])
 			pop = str(hour['pop'])+'%'
 			group = lambda time, temp, pop: (time, temp, pop)
 			formatted_hours.append(group(time, temp, pop))
 
 
 		return formatted_hours
+
+	def hourlyAverage(self):
+		hamweather = self.HamWeather[1]
+		wunderground = self.WunderGround[1]
+		forecast_io = self.ForecastIO[0]
+
+		print json.dumps(forecast_io, separators=(',',':'), indent=4)
+
+		## Some of my more proud work... ##
+
+		## Using list comprehension for speed!!!!! ##
+		## HamWeather Lists ## 
+		hamWeatherTemps = [float(temp['temp']) for temp in hamweather]
+		hamWeatherPops = [float(pop['pop']) for pop in hamweather]
+		## Forecast.io Lists ##
+		forecastioTemps = [float(temp['temperature']) for temp in forecast_io]
+		forecastioPops = [float(pop['precipProbability']) for pop in forecast_io]
+		## WunderGround Lists ## 
+		wundergroundTemps = [float(temp['temp']) for temp in wunderground]
+		wundergroundPops = [float(pop['precipProbability']) for pop in wunderground]
+
+		## Use an arbitrary set for time, they're all the same.
+		times = [str(time['time']).lstrip('0')+': ' for time in hamweather]
+
+		average = lambda nums, default=float('nan'): (sum(nums)/float(len(nums))) if nums else default
+		
+		average_temps = [round(average(n), 1) for n in zip(hamWeatherTemps, forecastioTemps, wundergroundTemps)]
+		average_pops = [round(average(n), 1) for n in zip(hamWeatherPops, forecastioPops, wundergroundPops)]
+
+		hourly_averages = [(time, temp, pop) for time, temp, pop in zip(times, average_temps, average_pops)]
+
+		return hourly_averages
 
 	def computeCurrentAverage(self):
 		wunderground_temp = float(self.WunderGround[0]['temp_f']) ## Current info stored in index[0]

@@ -14,6 +14,7 @@
 
 import os
 import sys
+import time
 import smtplib
 from email import message_from_file 
 from email.MIMEMultipart import MIMEMultipart
@@ -25,11 +26,12 @@ script_dir = sys.path[0]
 img_path = os.path.join(script_dir, 'email/img/WeatherFetchLogo.png')
 
 def sendEmail(email_body):
+	print "Sending email..."
 	strFrom = 'grantmcgovern.mcgovern@gmail.com'
-	strTo = 'mcgoga12@wfu.edu'
+	strTo = 'jamesbroyce@gmail.com'
 
 	msgRoot = MIMEMultipart('related')
-	msgRoot['Subject'] = 'Your Daily Report'
+	msgRoot['Subject'] = 'Your Daily Report for %s' % (time.strftime("%d/%m/%Y"))
 	msgRoot['From'] = strFrom
 	msgRoot['To'] = strTo
 
@@ -61,6 +63,7 @@ def sendEmail(email_body):
 			raise Exception("Invalid credentials - could not authenticate")
 		server.sendmail(strFrom, strTo, msgRoot.as_string())
 		server.close()
+		print "Email successfully sent."
 	except:
 		raise Exception("Email could not be sent")
 

@@ -65,7 +65,7 @@
                 /*  unset table align="left/right" */
                 float: none !important;
                 /*width: 100% !important;*/
-                width: 250px !important;
+               max-width: 100% !important;
 
                 /* change left/right padding and margins to top/bottom ones */
                 margin-bottom: 12px;
@@ -83,7 +83,7 @@
             img[class="col-3-img"] {
                 float: none;
                 margin-left: 6px;
-                max-width: 100%;
+                width: 100%;
             }
         }
 
@@ -100,18 +100,15 @@
 
       <!-- 600px container (white background) -->
       <table border="1" style="border-color:#a3aaff; border-width: 25px; border-spacing: 2px; border-style: solid; border-collapse: collapse; background-color: white; margin-left: 11px; margin-right: 11px;" width="600" cellpadding="60" cellspacing="0" class="container" bgcolor="#ffffff">
-        <tr>
+        <tr>  
           <td class="container-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding-left: 30px; padding-right: 30px; font-size: 13px; line-height: 20px; font-family: Helvetica, sans-serif; color: #333;" align="center">
-            <br>
-            <!-- ### BEGIN CONTENT ### -->
-            <div style="font-weight: bold; font-size: 18px; line-height: 24px; color: #D03C0F; text-align:center"><img src="cid:logo">
-            </div>
+            <div style="width: 100%; text-align:center; margin-bottom:15px"><img src="cid:logo"></div>
             <br>
             <table border="0" cellpadding="0" cellspacing="0" class="columns-container">
               <tr>
                 <td class="force-col" style="padding-right: 20px;" valign="top">
                     <!-- ### COLUMN 1 ### -->
-                    <table border="0" cellspacing="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellpadding="0" width="175" height="200" align="center" class="col-3">
+                    <table border="0" cellspacing="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellpadding="0" width="175" height="100%" align="center" class="col-3">
                     <tr>
                         <p style="color:#2469A0; font-weight:bold; text-align:center;">WeatherChannel</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
@@ -119,6 +116,12 @@
                         <p style="margin-top:10px;">Precipitation: {{ wunderground_current_pop }}</p>
                         <p style="margin-top:10px;">High: {{ wunderground_current_tempMax }}</p>
                         <p style="margin-top:10px;">Low: {{ wunderground_current_tempMin }}</p>
+                        <p><b>Hourly</b></p>
+                        <ul>
+                        {% for hour in wunderground_hourly %}
+                            <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                        {% endfor %}
+                        </ul>
                         </td>
                     </tr>
                     </table>
@@ -126,7 +129,7 @@
                 </td>
                 <td class="force-col" style="padding-right: 20px;" valign="top">
                     <!-- ### COLUMN 2 ### -->
-                    <table border="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellspacing="0" cellpadding="0" width="175" height="200" align="center" class="col-3">
+                    <table border="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellspacing="0" cellpadding="0" width="200" height="100%" align="center" class="col-3">
                     <tr>
                         <p style="color:#2469A0; font-weight:bold; text-align:center;">Forecast.io</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
@@ -134,6 +137,12 @@
                         <p style="margin-top:10px;">Precipitation: {{ forecast_io_current_pop }}</p>
                         <p style="margin-top:10px;">High: {{ forecast_io_current_tempMax }}</p>
                         <p style="margin-top:10px;">Low: {{ forecast_io_current_tempMin }}</p>
+                        <p><b>Hourly</b></p>
+                        <ul>
+                        {% for hour in forecast_io_hourly %}
+                            <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                        {% endfor %}
+                        </ul>
                         </td>
                     </tr>
                     </table>
@@ -142,7 +151,7 @@
                 <td class="force-col" style="padding-right: 20px" valign="top">
 
                     <!-- ### COLUMN 3 ### -->
-                    <table border="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellspacing="0" cellpadding="0" width="175" height="200" align="center" class="col-3">
+                    <table border="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellspacing="0" cellpadding="0" width="200" height="100%" align="center" class="col-3">
                         <tr>
                             <p style="color:#2469A0; font-weight:bold; text-align:center;">HamWeather</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
@@ -150,6 +159,12 @@
                             <p style="margin-top:10px;">Precipitation: {{ hamweather_current_pop }}</p>
                             <p style="margin-top:10px;">High: {{ hamweather_current_tempMax }}</p>
                             <p style="margin-top:10px;">Low: {{ hamweather_current_tempMin }}</p>
+                            <p><b>Hourly</b></p>
+                            <ul>
+                            {% for hour in hamweather_hourly %}
+                                <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                            {% endfor %}
+                            </ul>
                             </td>
                         </tr>
                     </table>
@@ -157,7 +172,7 @@
                 </td>
                 <td class="force-col"  valign="top">
                     <!-- ### COLUMN 3 ### -->
-                    <table border="0" cellspacing="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellpadding="0" width="175" height="200" align="center" class="col-3" id="last-col-3">
+                    <table border="0" cellspacing="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellpadding="0" width="175" height="100%" align="center" class="col-3" id="last-col-3">
                         <tr>
                             <p style="color:#2469A0; font-weight:bold; text-align:center;">Average</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
@@ -176,23 +191,18 @@
     <tr>
         <td class="container-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding-left: 30px; padding-right: 30px; font-size: 13px; font-family: Helvetica, sans-serif; color: #333;" align="left">
             <div style="text-align: center; font-weight: bold; font-size: 18px; color: #D03C0F;"><p>Your Map</p>
-                <img align="middle" style="max-width: 100%; margin-top:20px;" src="http://api.wunderground.com/api/8bb93b6670e3f3de/animatedradar/q/20015.gif?delay=30&timelabel=1&num=30&newmaps=1&timelabel.y=10"/>
+                <img class="col-3" align="middle" style="width: 80%; margin-top:20px;" src="http://api.wunderground.com/api/8bb93b6670e3f3de/animatedradar/q/20015.gif?delay=30&timelabel=1&num=30&newmaps=1&timelabel.y=10"/>
             </div>
             <br>
-
-            You should view the source code to see how this works. If you're struggling, here's a bit more documentation
-            <br><br>
-
-            <div style="font-weight: bold; font-size: 18px; line-height: 24px; color: #D03C0F">Tips</div>
+            <div style="margin-top: 30px; border-top: 1px solid #ddd; text-align:c; font-weight: bold; font-size: 18px; line-height: 24px; color: #D03C0F; text-align:center">Suggestions</div>
             <br>
 
-            <em>Slightly less than 600px</em><br>
             Your columns and container table probably will add up <em>slightly less</em> than <span style="font-family: Andale Mono, Courier, monospace; color: #666;">600px</span> to work in Outlook. How much less? Only testing, trial and error, and real content will tell you what that magic number is.
             <br><br>
 
-            <div style="border-top: 1px solid #ddd;">
+            <div style="border-top: 1px solid #ddd; text-align:center">
                 <br>
-                N.B. This copy is simple HTML and probably won't render 100% in an email client as you see it in a browser. It's meant as documentation, <em>not</em> part of the template.
+                <a href="www.github.com/g12mcgov">www.github.com/g12mcgov</a>
             </div>
 
             <!-- ### END CONTENT ### -->
