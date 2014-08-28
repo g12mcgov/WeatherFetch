@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 ##
 ## WeatherFetch - BODY.py.
 ## 
@@ -16,9 +18,9 @@ import json
 import jinja2
 
 ## Not the prettiest. TODO: Change this to a dict structure.
-def constructTemplate(forecast_io_current, wunderground_current, hamweather_current, 
+def constructTemplate(average_hourly, forecast_io_current, wunderground_current, hamweather_current, 
 			forecast_io_hourly, wunderground_hourly, hamweather_hourly, weather_map, current_average, 
-			max_average, min_average, pop):
+			max_average, min_average, pop, suggestions):
 
     templateLoader = jinja2.FileSystemLoader(searchpath="/")
     templateEnv = jinja2.Environment(loader=templateLoader)
@@ -60,10 +62,19 @@ def constructTemplate(forecast_io_current, wunderground_current, hamweather_curr
     templateVars['hamweather_current_tempMin'] = hamweather_current['tempMin']
     templateVars['hamweather_hourly'] = hamweather_hourly
 
+    ## Load average hourly data
+    templateVars['average_hourly'] = average_hourly
+
+    ## Misc. loads 
     templateVars['current_average'] = current_average
     templateVars['average_pop'] = pop
     templateVars['maxAverage'] = max_average
     templateVars['minAverage'] = min_average
+    templateVars['weatherMap'] = weather_map
+
+    ## Apparel Suggestions
+    templateVars['male'] = suggestions['male']
+    templateVars['female'] = suggestions['female']
 
     email_body = template.render(templateVars)
 

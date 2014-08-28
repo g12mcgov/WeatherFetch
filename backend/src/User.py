@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 ##
 ## WeatherFetch - USER.py.
 ## 
@@ -140,7 +142,7 @@ class User():
 		hours = hourly_data
 		
 		for hour in hours:
-			time = hour['time']
+			time = str(hour['time'])+': '
 			temp = hour['temp']
 			pop = hour['precipProbability']+'%'
 			group = lambda time, temp, pop: (time, temp, pop)
@@ -171,8 +173,6 @@ class User():
 		wunderground = self.WunderGround[1]
 		forecast_io = self.ForecastIO[0]
 
-		print json.dumps(forecast_io, separators=(',',':'), indent=4)
-
 		## Some of my more proud work... ##
 
 		## Using list comprehension for speed!!!!! ##
@@ -192,7 +192,7 @@ class User():
 		average = lambda nums, default=float('nan'): (sum(nums)/float(len(nums))) if nums else default
 		
 		average_temps = [round(average(n), 1) for n in zip(hamWeatherTemps, forecastioTemps, wundergroundTemps)]
-		average_pops = [round(average(n), 1) for n in zip(hamWeatherPops, forecastioPops, wundergroundPops)]
+		average_pops = [str(int(average(n)))+'%' for n in zip(hamWeatherPops, forecastioPops, wundergroundPops)]
 
 		hourly_averages = [(time, temp, pop) for time, temp, pop in zip(times, average_temps, average_pops)]
 
@@ -237,11 +237,29 @@ class User():
 		hamweather_current = float(self.HamWeather[0]['pop']) ## Current info stored in index[0]
 
 		avg = lambda wunderground_current, forecast_io_current, hamweather_current: round(((wunderground_current+forecast_io_current+hamweather_current)/3), 1)
-		average = str(avg(wunderground_current, forecast_io_current, hamweather_current))+'%'		
+		average = str(int(avg(wunderground_current, forecast_io_current, hamweather_current)))+'%'		
 		
 
 		return average
 
+	def iconDispatcher(self):
+		## Using WunderGround icon set as they have the most detailed/defined
+		icon = self.WunderGround[0]['icon']
+
+		if icon == 'clear' or icon == 'sunny' or icon == 'mostlysunny':
+			return 'Email/img/icons/sun.png'
+		elif icon == 'cloudy':
+			return 'Email/img/icons/cloudy.png'
+		elif icon == 'partlycloudy' or icon == 'mostlycloudy' or icon == 'partlysunny':
+			return 'Email/img/icons/partly_cloudy.png'
+		elif icon == 'rain' or icon == 'chancerain':
+			return 'Email/img/icons/rain.png'
+		elif icon == 'sleet' or icon == 'snow' or icon == 'flurries' or icon == 'chanceflurries' or icon == 'chancesleet' or icon == 'chancesnow':
+			return 'Email/img/icons/snow.png'
+		elif icon == 'fog' or icon == 'hazy':
+			return 'Email/img/icons/fog.png'
+ 		elif icon == 'tstorms' or icon == 'unknown' or icon == 'chancetstorms':
+ 			return 'Email/img/icons/storm.png'
 
 
 

@@ -24,10 +24,12 @@
 
     <title>Antwort - responsive Email Layout</title>
     <style type="text/css">
+        @import url(http://fonts.googleapis.com/css?family=Droid+Sans|Lobster);
+        @import url(http://fonts.googleapis.com/css?family=Montserrat);
 
         /* Resets: see reset.css for details */
-        .ReadMsgBody { width: 100%; background-color: #ebebeb;}
-        .ExternalClass {width: 100%; background-color: #ebebeb;}
+        .ReadMsgBody { width: 100%; background-color: #daddff;}
+        .ExternalClass {width: 100%; background-color: #daddff;}
         .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height:100%;}
         body {-webkit-text-size-adjust:none; -ms-text-size-adjust:none;}
         body {margin:0; padding:0;}
@@ -65,7 +67,7 @@
                 /*  unset table align="left/right" */
                 float: none !important;
                 /*width: 100% !important;*/
-               max-width: 100% !important;
+                max-width: 100% !important;
 
                 /* change left/right padding and margins to top/bottom ones */
                 margin-bottom: 12px;
@@ -94,53 +96,55 @@
 <br>
 
 <!-- 100% wrapper (grey background) -->
-<table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#a3aaff">
+<table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#daddff">
   <tr>
-    <td align="center" valign="top" bgcolor="#ebebeb" style="background-color: #10b2ff;">
+    <td align="center" valign="top" bgcolor="#daddff" style="background-color: #10b2ff;">
 
       <!-- 600px container (white background) -->
-      <table border="1" style="border-color:#a3aaff; border-width: 25px; border-spacing: 2px; border-style: solid; border-collapse: collapse; background-color: white; margin-left: 11px; margin-right: 11px;" width="600" cellpadding="60" cellspacing="0" class="container" bgcolor="#ffffff">
+      <table border="1" style="border-color:#daddff; border-width: 25px; border-spacing: 2px; border-style: solid; border-collapse: collapse; background-color: white; margin-left: 11px; margin-right: 11px;" width="600" cellpadding="60" cellspacing="0" class="container" bgcolor="#ffffff">
         <tr>  
-          <td class="container-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding-left: 30px; padding-right: 30px; font-size: 13px; line-height: 20px; font-family: Helvetica, sans-serif; color: #333;" align="center">
-            <div style="width: 100%; text-align:center; margin-bottom:15px"><img src="cid:logo"></div>
+          <td class="container-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding-left: 30px; padding-right: 30px; font-size: 13px; font-family: Helvetica, sans-serif; color: #333;" align="center">
+            <!-- Logo -->
+            <img class="col-3-img" style="text-align:center; margin-bottom: 50px;" src="cid:logo">
             <br>
             <table border="0" cellpadding="0" cellspacing="0" class="columns-container">
               <tr>
                 <td class="force-col" style="padding-right: 20px;" valign="top">
                     <!-- ### COLUMN 1 ### -->
-                    <table border="0" cellspacing="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellpadding="0" width="175" height="100%" align="center" class="col-3">
+                    <table cellspacing="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; border-style: solid; border-color: #10b2ff; background:#daddff;" cellpadding="0" width="175" height="100%" align="center" class="col-3">
                     <tr>
-                        <p style="color:#2469A0; font-weight:bold; text-align:center;">WeatherChannel</p>
+                        <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">Average</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                        <p>{{ wunderground_current_temp }}</p>
-                        <p style="margin-top:10px;">Precipitation: {{ wunderground_current_pop }}</p>
-                        <p style="margin-top:10px;">High: {{ wunderground_current_tempMax }}</p>
-                        <p style="margin-top:10px;">Low: {{ wunderground_current_tempMin }}</p>
+                        <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                        <p style="font-size: 35px; font-family: 'Montserrat', sans-serif;"><b>{{ current_average }}&#176;</b></p>
+                        <p style="margin-top:10px;">Precipitation: {{ average_pop }}</p>
+                        <p style="margin-top:10px;">Hi: {{ maxAverage }} |  Lo: {{ minAverage }}</p>
+                        <hr style="color: black;">
                         <p><b>Hourly</b></p>
-                        <ul>
-                        {% for hour in wunderground_hourly %}
-                            <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                        <ul align="left" style="list-style-type: none;">
+                        {% for hour in average_hourly %}
+                            <li>{{hour.0}} - {{ hour.1 }} - {{ hour.2 }}</li>
                         {% endfor %}
                         </ul>
                         </td>
                     </tr>
                     </table>
-
                 </td>
                 <td class="force-col" style="padding-right: 20px;" valign="top">
                     <!-- ### COLUMN 2 ### -->
-                    <table border="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellspacing="0" cellpadding="0" width="200" height="100%" align="center" class="col-3">
+                    <table border="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellspacing="0" cellpadding="0" width="175" height="100%" align="center" class="col-3">
                     <tr>
-                        <p style="color:#2469A0; font-weight:bold; text-align:center;">Forecast.io</p>
+                        <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">Forecast.io</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                        <p>{{ forecast_io_current_temp }}</p>
+                        <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                        <p style="font-size: 30px; font-family: 'Montserrat', sans-serif;">{{ forecast_io_current_temp }}&#176;</p>
                         <p style="margin-top:10px;">Precipitation: {{ forecast_io_current_pop }}</p>
-                        <p style="margin-top:10px;">High: {{ forecast_io_current_tempMax }}</p>
-                        <p style="margin-top:10px;">Low: {{ forecast_io_current_tempMin }}</p>
+                        <p style="margin-top:10px;">Hi: {{ forecast_io_current_tempMax }} | Lo: {{forecast_io_current_tempMin }}</p>
+                        <hr style="color: black;">
                         <p><b>Hourly</b></p>
-                        <ul>
+                        <ul align="left" style="list-style-type: none;">
                         {% for hour in forecast_io_hourly %}
-                            <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                            <li>{{hour.0}}{{ " " }}   {{ hour.1 }}{{ " " }}   {{ hour.2 }}</li>
                         {% endfor %}
                         </ul>
                         </td>
@@ -151,18 +155,19 @@
                 <td class="force-col" style="padding-right: 20px" valign="top">
 
                     <!-- ### COLUMN 3 ### -->
-                    <table border="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellspacing="0" cellpadding="0" width="200" height="100%" align="center" class="col-3">
+                    <table border="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellspacing="0" cellpadding="0" width="175" height="100%" align="center" class="col-3">
                         <tr>
-                            <p style="color:#2469A0; font-weight:bold; text-align:center;">HamWeather</p>
+                            <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">HamWeather</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                            <p>{{ hamweather_current_temp }}</p>
+                            <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                            <p style="font-size: 30px; font-family: 'Montserrat', sans-serif;">{{ hamweather_current_temp }}&#176;</p>
                             <p style="margin-top:10px;">Precipitation: {{ hamweather_current_pop }}</p>
-                            <p style="margin-top:10px;">High: {{ hamweather_current_tempMax }}</p>
-                            <p style="margin-top:10px;">Low: {{ hamweather_current_tempMin }}</p>
+                            <p style="margin-top:10px;">Hi: {{ hamweather_current_tempMax }} | Lo: {{ hamweather_current_tempMin }}</p>
+                            <hr style="color: black;">
                             <p><b>Hourly</b></p>
-                            <ul>
+                            <ul align="left" style="list-style-type: none;">
                             {% for hour in hamweather_hourly %}
-                                <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                                <li>{{ hour.0 }}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
                             {% endfor %}
                             </ul>
                             </td>
@@ -172,14 +177,21 @@
                 </td>
                 <td class="force-col"  valign="top">
                     <!-- ### COLUMN 3 ### -->
-                    <table border="0" cellspacing="0" bgcolor="#ebebeb" style="background:#ebebeb;" cellpadding="0" width="175" height="100%" align="center" class="col-3" id="last-col-3">
+                    <table border="0" cellspacing="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellpadding="0" width="175" height="100%" align="center" class="col-3" id="last-col-3">
                         <tr>
-                            <p style="color:#2469A0; font-weight:bold; text-align:center;">Average</p>
+                            <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">WeatherChannel</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                            <p>{{ current_average }}</p>
-                            <p style="margin-top:10px;">Precipitation: {{ average_pop }}</p>
-                            <p style="margin-top:10px;">High: {{ maxAverage }}</p>
-                            <p style="margin-top:10px;">Low: {{ minAverage }}</p>
+                            <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                            <p style="font-size: 30px; font-family: 'Montserrat', sans-serif;">{{ wunderground_current_temp }}&#176;</p>
+                            <p style="margin-top:10px;">Precipitation: {{ wunderground_current_pop }}</p>
+                            <p style="margin-top:10px;">Hi: {{ wunderground_current_tempMax }} | Lo: {{ wunderground_current_tempMin }}</p>
+                            <hr style="color: black;">
+                            <p><b>Hourly</b></p>
+                            <ul align="left" style="list-style-type: none;">
+                            {% for hour in wunderground_hourly %}
+                                <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                            {% endfor %}
+                            </ul>
                             </td>
                         </tr>
                     </table>
@@ -190,29 +202,78 @@
     </tr>
     <tr>
         <td class="container-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding-left: 30px; padding-right: 30px; font-size: 13px; font-family: Helvetica, sans-serif; color: #333;" align="left">
-            <div style="text-align: center; font-weight: bold; font-size: 18px; color: #D03C0F;"><p>Your Map</p>
-                <img class="col-3" align="middle" style="width: 80%; margin-top:20px;" src="http://api.wunderground.com/api/8bb93b6670e3f3de/animatedradar/q/20015.gif?delay=30&timelabel=1&num=30&newmaps=1&timelabel.y=10"/>
-            </div>
-            <br>
-            <div style="margin-top: 30px; border-top: 1px solid #ddd; text-align:c; font-weight: bold; font-size: 18px; line-height: 24px; color: #D03C0F; text-align:center">Suggestions</div>
-            <br>
-
-            Your columns and container table probably will add up <em>slightly less</em> than <span style="font-family: Andale Mono, Courier, monospace; color: #666;">600px</span> to work in Outlook. How much less? Only testing, trial and error, and real content will tell you what that magic number is.
-            <br><br>
-
-            <div style="border-top: 1px solid #ddd; text-align:center">
-                <br>
-                <a href="www.github.com/g12mcgov">www.github.com/g12mcgov</a>
+            <div style="text-align: center; font-weight: bold; font-size: 30px; color: #D03C0F;"><h1 style="color: #10b2ff; font-family: 'Lobster', Georgia;"><b>Current Radar:</b></h1>
+                <img class="col-3" align="middle" style="margin-top:20px; border: 12px solid #10b2ff;" src="{{ weatherMap }}"/>
             </div>
 
-            <!-- ### END CONTENT ### -->
+            <tr>  
+              <td class="container-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding-left: 30px; padding-right: 30px; font-size: 13px; font-family: Helvetica, sans-serif; color: #333;" align="center">
+                <!-- Logo -->
+            <div style="margin-top: 30px; text-align: c; font-weight: bold; font-size: 30px; text-align:center"><h1 style="color: #10b2ff; font-family: 'Lobster', Georgia;"><b>Clothing Suggestions:</b></h1></div>
+                <table border="0" cellpadding="0" cellspacing="0" class="columns-container">
+                  <tr>
+                    <td class="force-col" style="padding-right: 20px;" valign="top">
+                      <table cellspacing="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; border-style: solid; border-color: #daddff; background: #9fe0ff;" cellpadding="0" width="200" height="100%" align="center" class="col-3">
+                      <tr>
+                        <p style="color:#2469A0; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">Guys</p>
+                        <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
+                        <br>
+                        <p style="text-align: center; font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Status:</b></p>
+                        <p style="text-align: center;">{{ male.rain_header }}</p>
+                        <hr>
+                        <dl align="left" style="margin-left: 7px;">
+                          <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Umbrella:</b></dt>
+                          <dd> - {{ male.umbrella }}</dd>
+                          <br>
+                          <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Jacket:</b></dt>
+                          <dd> - {{ male.jacket }}</dd>
+                          <br>
+                          <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Top:</b></dt>
+                          <dd> - {{ male.top }}</dd>
+                          <br>
+                          <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Bottom:</b></dt>
+                          <dd> - {{ male.bottom }}</dd>
+                        </dl>
+                        </td>
+                      </tr>
+                      </table>
+                    </td>
+                    <td class="force-col" style="padding-right: 20px;" valign="top">
+                      <table cellspacing="0" bgcolor="#9fe0ff" style="border: 3px; border-radius: 25px; border-style: solid; border-color: #10b2ff; background: #daddff;" cellpadding="0" width="200" height="100%" align="center" class="col-3">
+                        <tr>
+                          <p style="color:#2469A0; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif; font-family: 'Montserrat', sans-serif;">Gals</p>
+                          <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
+                          <br>
+                          <p style="text-align: center; font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Status:</b></p>
+                          <p style="text-align: center;">{{ female.rain_header }}</p>
+                          <hr>
+                          <dl align="left" style="margin-left: 7px;">
+                            <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Umbrella:</b></dt>
+                            <dd> - {{ female.umbrella }}</dd>
+                            <br>
+                            <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Jacket:</b></dt>
+                            <dd> - {{ female.jacket }}</dd>
+                            <br>
+                            <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Top:</b></dt>
+                            <dd> - {{ female.top }}</dd>
+                            <br>
+                            <dt style="font-size: 15px; font-family: 'Montserrat', sans-serif;"><b>Bottom:</b></dt>
+                            <dd> - {{ female.bottom }}</dd>
+                          </dl>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table><!--/ end .columns-container-->
+              </td>
+            </tr>
             <br><br>
-
           </td>
         </tr>
+      </td>
       </table>
       <!--/600px container -->
-
     </td>
   </tr>
 </table>

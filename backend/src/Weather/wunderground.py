@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 ##
 ## WeatherFetch - MAIN.
 ## 
@@ -38,8 +40,9 @@ def getCurrentWeather(zipcodes):
 
 	save_path = 'Weather/responses/'
 	complete_path = save_path + 'wunderground_current.js'
-	with open(complete_path, "wb") as outfile:
-		outfile.write(json.dumps(current_weather, separators=(',',':'), indent=4))
+	
+	#with open(complete_path, "wb") as outfile:
+	#	outfile.write(json.dumps(current_weather, separators=(',',':'), indent=4))
 	
 	return current_weather
 
@@ -48,8 +51,9 @@ def getHourlyForecast(zipcodes):
 
 	save_path = 'Weather/responses/'
 	complete_path = save_path + 'wunderground_hourly.js'
-	with open(complete_path, "wb") as outfile:
-		outfile.write(json.dumps(hourly_weather, separators=(',',':'), indent=4))
+	
+	#with open(complete_path, "wb") as outfile:
+	#	outfile.write(json.dumps(hourly_weather, separators=(',',':'), indent=4))
 
 	return hourly_weather
 

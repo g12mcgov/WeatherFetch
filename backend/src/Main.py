@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 ##
 ## WeatherFetch - MAIN.
 ## 
@@ -69,16 +71,17 @@ def main():
 		min_average = user.computeMinAverage()
 		## Precipitation ##
 		pop = user.currentPOP()
+		## Icon 
+		icon_path = user.iconDispatcher()
 		## Make Suggestions ##
 		suggestions = suggestion(forecast_io_hourly, current_average, max_average, min_average, pop)
-		
 		## Construct email and send. If we get enough users, this will be switched to send batch messages 
 		## at once, most likely through an API (mailchimp) or using postfix.
-		email_body = constructTemplate(forecast_io_current, wunderground_current, hamweather_current, 
+		email_body = constructTemplate(average_hourly, forecast_io_current, wunderground_current, hamweather_current, 
 			forecast_io_hourly, wunderground_hourly, hamweather_hourly, weather_map, current_average, 
-			max_average, min_average, pop)
+			max_average, min_average, pop, suggestions)
 		
-		sendEmail(email_body)
+		sendEmail(email_body, icon_path)
 
 def createUserDict(members):
 	userDicts = []

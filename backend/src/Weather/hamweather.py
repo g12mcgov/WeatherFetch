@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 ##
 ## WeatherFetch - Hamweather.py
 ## 
@@ -40,8 +42,9 @@ def getHourlyWeather(zipcodes):
 
 	save_path = 'Weather/responses/'
 	complete_path = save_path + 'hamweather_hourly.js'
-	with open(complete_path, "wb") as outfile:
-		outfile.write(json.dumps(hourly, separators=(',',':'), indent=4))
+	
+	#with open(complete_path, "wb") as outfile:
+	#	outfile.write(json.dumps(hourly, separators=(',',':'), indent=4))
 
 	return hourly
 
@@ -52,8 +55,9 @@ def getCurrentWeather(zipcodes):
 
 	save_path = 'Weather/responses/'
 	complete_path = save_path + 'hamweather_current.js'
-	with open(complete_path, "wb") as outfile:
-		outfile.write(json.dumps(current, separators=(',',':'), indent=4))
+	
+	#with open(complete_path, "wb") as outfile:
+	#	outfile.write(json.dumps(current, separators=(',',':'), indent=4))
 
 	return current
 

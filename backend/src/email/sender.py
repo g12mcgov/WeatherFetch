@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 ##
 ## WeatherFetch - GROUPS.
 ## 
@@ -25,13 +27,13 @@ from body import constructTemplate
 script_dir = sys.path[0]
 img_path = os.path.join(script_dir, 'email/img/WeatherFetchLogo.png')
 
-def sendEmail(email_body):
+def sendEmail(email_body, icon_path):
 	print "Sending email..."
 	strFrom = 'grantmcgovern.mcgovern@gmail.com'
 	strTo = 'jamesbroyce@gmail.com'
 
 	msgRoot = MIMEMultipart('related')
-	msgRoot['Subject'] = 'Your Daily Report for %s' % (time.strftime("%d/%m/%Y"))
+	msgRoot['Subject'] = 'Your Daily Report for %s' % (time.strftime("%m/%d/%Y"))
 	msgRoot['From'] = strFrom
 	msgRoot['To'] = strTo
 
@@ -45,12 +47,19 @@ def sendEmail(email_body):
 	msgAlternative.attach(msgText)
 
 	fp = open(img_path, 'rb')
-	msgImage = MIMEImage(fp.read())
+	logo_image = MIMEImage(fp.read())
+
+	fp = open(str(icon_path), 'rb')
+	icon_image = MIMEImage(fp.read())
+
 	fp.close()
 
 	## Associate images with their respective content
-	msgImage.add_header('Content-ID', '<logo>')
-	msgRoot.attach(msgImage)
+	logo_image.add_header('Content-ID', '<logo>')
+	icon_image.add_header('Content-ID', '<icon>')
+	
+	msgRoot.attach(icon_image)
+	msgRoot.attach(logo_image)
 
 	try:
 		server = smtplib.SMTP('smtp.gmail.com:587')
