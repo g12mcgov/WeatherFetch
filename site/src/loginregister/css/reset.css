@@ -1,0 +1,69 @@
+/* 
+
+Title: style.css
+Purpose: CSS3 stylesheet for reset.php;
+Creator: Grant McGovern;
+Date: 07/16/2014;
+
+~ WeatherFetch ~
+
+*/
+
+.reset {
+	background: url("img/clouds_background.png") no-repeat center center fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+.resetForm {
+	height: 300px;
+	position: relative;
+	top: 45%;
+	transform: translateY(-50%);
+}
+
+.resetForm h1 {
+	color: white;
+	margin-bottom: 40px;
+}
+
+
+.resetForm p {
+	color: white;
+}
+
+.resetForm a {
+	color: white;
+}
+
+.centered {
+	text-align: center;
+}
+
+
+#resetButton { 
+	color: white; 
+	background: none;
+	border-color: white; 
+	width: 200px;
+	margin-top: 45px;
+	margin-left: auto;
+	margin-right: auto;
+} 
+
+#resetButton:hover { 
+	background-color: #10b2ff; 
+}
+
+#loginLogo {
+	display: block;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	width: 300px;
+	height: 87px;
+	background: url("img/WeatherFetch_Logo_TRANSPARENT.svg") no-repeat;
+} 	
