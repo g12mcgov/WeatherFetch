@@ -111,11 +111,11 @@
               <tr>
                 <td class="force-col" style="padding-right: 20px;" valign="top">
                     <!-- ### COLUMN 1 ### -->
-                    <table cellspacing="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; border-style: solid; border-color: #10b2ff; background:#daddff;" cellpadding="0" width="175" height="100%" align="center" class="col-3">
+                    <table cellspacing="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; border-style: solid; border-color: #10b2ff; background:#daddff;" cellpadding="0" width="200" height="100%" align="center" class="col-3">
                     <tr>
                         <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">Average</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                        <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                        <img class="col-3-img" style="text-align: center; margin-top: 15px; width: 50px;" src="cid:icon"> 
                         <p style="font-size: 35px; font-family: 'Montserrat', sans-serif;"><b>{{ current_average }}&#176;</b></p>
                         <p style="margin-top:10px;">Precipitation: {{ average_pop }}</p>
                         <p style="margin-top:10px;">Hi: {{ maxAverage }} |  Lo: {{ minAverage }}</p>
@@ -123,7 +123,7 @@
                         <p><b>Hourly</b></p>
                         <ul align="left" style="list-style-type: none;">
                         {% for hour in average_hourly %}
-                            <li>{{hour.0}} - {{ hour.1 }} - {{ hour.2 }}</li>
+                            <li>{{hour.0}} | {{ hour.1 }} | {{ hour.2 }}</li>
                         {% endfor %}
                         </ul>
                         </td>
@@ -132,11 +132,11 @@
                 </td>
                 <td class="force-col" style="padding-right: 20px;" valign="top">
                     <!-- ### COLUMN 2 ### -->
-                    <table border="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellspacing="0" cellpadding="0" width="175" height="100%" align="center" class="col-3">
+                    <table border="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellspacing="0" cellpadding="0" width="200" height="100%" align="center" class="col-3">
                     <tr>
                         <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">Forecast.io</p>
                         <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                        <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                        <img class="col-3-img" style="text-align: center; margin-top: 15px; width: 50px;" src="cid:icon"> 
                         <p style="font-size: 30px; font-family: 'Montserrat', sans-serif;">{{ forecast_io_current_temp }}&#176;</p>
                         <p style="margin-top:10px;">Precipitation: {{ forecast_io_current_pop }}</p>
                         <p style="margin-top:10px;">Hi: {{ forecast_io_current_tempMax }} | Lo: {{forecast_io_current_tempMin }}</p>
@@ -144,7 +144,7 @@
                         <p><b>Hourly</b></p>
                         <ul align="left" style="list-style-type: none;">
                         {% for hour in forecast_io_hourly %}
-                            <li>{{hour.0}}{{ " " }}   {{ hour.1 }}{{ " " }}   {{ hour.2 }}</li>
+                            <li>{{hour.0}} | {{ hour.1 }} | {{ hour.2 }}</li>
                         {% endfor %}
                         </ul>
                         </td>
@@ -155,11 +155,11 @@
                 <td class="force-col" style="padding-right: 20px" valign="top">
 
                     <!-- ### COLUMN 3 ### -->
-                    <table border="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellspacing="0" cellpadding="0" width="175" height="100%" align="center" class="col-3">
+                    <table border="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellspacing="0" cellpadding="0" width="200" height="100%" align="center" class="col-3">
                         <tr>
                             <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">HamWeather</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                            <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                            <img class="col-3-img" style="text-align: center; margin-top: 15px; width: 50px" src="cid:icon"> 
                             <p style="font-size: 30px; font-family: 'Montserrat', sans-serif;">{{ hamweather_current_temp }}&#176;</p>
                             <p style="margin-top:10px;">Precipitation: {{ hamweather_current_pop }}</p>
                             <p style="margin-top:10px;">Hi: {{ hamweather_current_tempMax }} | Lo: {{ hamweather_current_tempMin }}</p>
@@ -167,7 +167,7 @@
                             <p><b>Hourly</b></p>
                             <ul align="left" style="list-style-type: none;">
                             {% for hour in hamweather_hourly %}
-                                <li>{{ hour.0 }}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                                <li>{{ hour.0 }} | {{ hour.1 }} | {{ hour.2 }}</li>
                             {% endfor %}
                             </ul>
                             </td>
@@ -177,11 +177,11 @@
                 </td>
                 <td class="force-col"  valign="top">
                     <!-- ### COLUMN 3 ### -->
-                    <table border="0" cellspacing="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellpadding="0" width="175" height="100%" align="center" class="col-3" id="last-col-3">
+                    <table border="0" cellspacing="0" bgcolor="#daddff" style="border: 3px; border-radius: 25px; background:#daddff;" cellpadding="0" width="200" height="100%" align="center" class="col-3" id="last-col-3">
                         <tr>
                             <p style="color:#10b2ff; font-weight:bold; text-align:center; font-size: 18px; font-family: 'Montserrat', sans-serif;">WeatherChannel</p>
                             <td align="center" valign="top" style="font-size:13px; line-height: 20px; font-family: Arial, sans-serif;">
-                            <img class="col-3-img" style="text-align: center; margin-top: 15px;" src="cid:icon"> 
+                            <img class="col-3-img" style="text-align: center; margin-top: 15px; width: 50px;" src="cid:icon"> 
                             <p style="font-size: 30px; font-family: 'Montserrat', sans-serif;">{{ wunderground_current_temp }}&#176;</p>
                             <p style="margin-top:10px;">Precipitation: {{ wunderground_current_pop }}</p>
                             <p style="margin-top:10px;">Hi: {{ wunderground_current_tempMax }} | Lo: {{ wunderground_current_tempMin }}</p>
@@ -189,7 +189,7 @@
                             <p><b>Hourly</b></p>
                             <ul align="left" style="list-style-type: none;">
                             {% for hour in wunderground_hourly %}
-                                <li>{{hour.0}}{{ " " }}{{ hour.1 }}{{ " " }}{{ hour.2 }}</li>
+                                <li>{{hour.0}} | {{ hour.1 }} | {{ hour.2 }}</li>
                             {% endfor %}
                             </ul>
                             </td>

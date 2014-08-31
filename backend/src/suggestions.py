@@ -32,7 +32,7 @@ def suggestion(forecast_io_hourly, current_average, max_average, min_average, pr
 	index = randint(0,2)
 
 	## If we are expecting some rain
-	if (pop >= 0):
+	if (pop >= 40):
 		## Grab headers ##
 		male['rain_header'] = rain_headers[index]
 		female['rain_header'] = rain_headers[index]
@@ -40,12 +40,15 @@ def suggestion(forecast_io_hourly, current_average, max_average, min_average, pr
 		male['jacket'] = 'Rain jacket'
 		female['jacket'] = 'Rain jacket'
 		
-		male['umbrella'] = True
-		female['umbrella'] = True
+		male['umbrella'] = 'Bring an umbrella!'
+		female['umbrella'] = 'Bring an umbrella!'
 
 	else:
 		male['rain_header'] = "No rain today!"
 		female['rain_header'] = "No rain today!"
+
+		male['umbrella'] = 'No need to bring an umbrella!'
+		female['umbrella'] = 'No need to bring an umbrella!'
 
 	if (temp >= 65):
 		male['top'] = 'Tee shirt or short sleeved shirt'

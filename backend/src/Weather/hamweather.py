@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python	
 
 ##
 ## WeatherFetch - Hamweather.py
@@ -103,6 +103,7 @@ def processData(current, hourly):
 	currentDict['sunrise'] = datetime.datetime.fromtimestamp(int(current_object['sunrise'])).strftime('%I:%M %p')
 	currentDict['icon'] = current_object['icon']
 	currentDict['time'] = datetime.datetime.fromtimestamp(int(current_object['timestamp'])).strftime('%I:%M %p')
+	print current_object['tempF']
 	currentDict['temp'] = current_object['tempF']
 	currentDict['snowDepth'] = current_object['snowDepthIN']
 	currentDict['humidity'] = current_object['humidity']
