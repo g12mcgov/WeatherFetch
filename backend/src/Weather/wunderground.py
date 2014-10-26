@@ -23,8 +23,8 @@ import urlparse
 import operator
 from wrappers import * 
 
-API_KEY = '8bb93b6670e3f3de'
-BASE_URL = 'http://api.wunderground.com/api/'
+API_KEY = '#'
+BASE_URL = '#'
 
 @counter
 def wunderGround(zipcodes):
