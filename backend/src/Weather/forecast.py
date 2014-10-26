@@ -21,8 +21,8 @@ from pyzipcode import ZipCodeDatabase
 import itertools 
 from wrappers import * 
 
-API_KEY = '4dd221246d2daff383469cf4a5b68b32/'
-BASE_URL = 'https://api.forecast.io/forecast/'
+API_KEY = '#'
+BASE_URL = '#'
 
 @counter
 def forecastIO(zipcode):
