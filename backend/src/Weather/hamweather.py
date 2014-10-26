@@ -23,8 +23,8 @@ import datetime
 import operator	
 from wrappers import * 
 
-CONSUMER_ID = 'So5KnMdtB8V1R0CvSfS8u'
-CONSUMER_SECRET = '8aGQkpCIjzaVdMWDZJT2iWRmP1KvlSic5kE5lIGq'
+CONSUMER_ID = '#'
+CONSUMER_SECRET = '#'
 BASE_URL = 'http://api.aerisapi.com/'
 
 @counter
