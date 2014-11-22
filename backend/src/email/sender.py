@@ -66,7 +66,7 @@ def sendEmail(email_body, icon_path):
 		server.ehlo()
 		server.starttls()
 		try:
-			server.login('grantmcgovern.mcgovern@gmail.com', 'grantmcgovern1')
+			server.login('##', '##')
 		except SMTPAuthenticationError:
 			server.quit()
 			raise Exception("Invalid credentials - could not authenticate")
