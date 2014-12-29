@@ -6,7 +6,7 @@ require_once '/Users/grantmcgovern/vendor/swiftmailer/swiftmailer/lib/swift_requ
 //Create the Transport
 $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
   ->setUsername('grantmcgovern.mcgovern@gmail.com')
-  ->setPassword('grantmcgovern1')
+  ->setPassword('#')
   ;
  
 /*
